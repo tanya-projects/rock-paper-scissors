@@ -109,7 +109,7 @@ button {
   justify-content: space-between;
 }
 .item {
-  font-size: 400%;
+  font-size: 350%;
 }
 .item--opponent {
   text-shadow: 3px -5px 4px var(--opponent-shadow);
@@ -133,13 +133,13 @@ button {
     text-shadow: 3px -5px 4px var(--opponent-shadow);
   }
   80% {
-    top: 16vh;
+    top: 12vh;
   }
   90% {
-    top: 14vh;
+    top: 11vh;
   }
   100% {
-    top: 14vh;
+    top: 12vh;
     text-shadow: 1px -1px 4px var(--center-shadow);
   }
 }
@@ -159,13 +159,13 @@ button {
     text-shadow: 3px 5px 4px var(--you-shadow);
   }
   80% {
-    bottom: 16vh;
+    bottom: 12vh;
   }
   90% {
-    bottom: 14vh;
+    bottom: 11vh;
   }
   100% {
-    bottom: 15vh;
+    bottom: 12vh;
     text-shadow: 1px 1px 4px var(--center-shadow);
   }
 }
