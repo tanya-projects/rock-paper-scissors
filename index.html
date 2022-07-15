@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="shortcut icon" href="#" /> -->
+    <title>Rock Paper Scissors Game</title>
+  </head>
+
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading centered">LOADING</div>
+
+    <!-- Game Screen -->
+    <div class="game--screen">
+      <div class="player flex-center-col player--opponent">
+        <div class="life--container life-opponent--container">
+          <img class="life--item life--opponent" src="img/life-opponent.png" />
+          <img class="life--item life--opponent" src="img/life-opponent.png" />
+          <img class="life--item life--opponent" src="img/life-opponent.png" />
+        </div>
+
+        <div class="items--container items-container--opponent">
+          <h2
+            data_winrule="rock-beat-scissors"
+            data_loserule="paper-beat-rock"
+            class="item item--opponent item--opponent-1"
+          >
+            🗿
+          </h2>
+          <h2
+            data_winrule="paper-beat-rock"
+            data_loserule="scissors-beat-paper"
+            class="item item--opponent item--opponent-2"
+          >
+            📄
+          </h2>
+          <h2
+            data_winrule="scissors-beat-paper"
+            data_loserule="rock-beat-scissors"
+            class="item item--opponent item--opponent-3"
+          >
+            ✂️
+          </h2>
+        </div>
+      </div>
+
+      <div class="game--round flex-center-col hidden centered">
+        <div class="winner--round format--text">OPPONENT WINS</div>
+        <button class="winner--round format--text btn btn--next">
+          NEXT ROUND
+        </button>
+      </div>
+
+      <div class="player flex-center-col player--you">
+        <div class="items--container items-container--you">
+          <h2
+            data_winrule="rock-beat-scissors"
+            data_loserule="paper-beat-rock"
+            class="item item--you item--you-1"
+          >
+            🗿
+          </h2>
+          <h2
+            data_winrule="paper-beat-rock"
+            data_loserule="scissors-beat-paper"
+            class="item item--you item--you-2"
+          >
+            📄
+          </h2>
+          <h2
+            data_winrule="scissors-beat-paper"
+            data_loserule="rock-beat-scissors"
+            class="item item--you item--you-3"
+          >
+            ✂️
+          </h2>
+        </div>
+
+        <div class="life--container life-you--container">
+          <img class="life--item life--you" src="img/life-you.png" />
+          <img class="life--item life--you" src="img/life-you.png" />
+          <img class="life--item life--you" src="img/life-you.png" />
+        </div>
+      </div>
+    </div>
+    <!-- / Game Screen ^ -->
+
+    <!-- Result Screen -->
+    <div class="total--result hidden centered flex-center-col">
+      <h1 class="total--result-text format--text">WHO WINS</h1>
+      <button class="btn new--game format--text">NEW GAME</button>
+    </div>
+    <!-- Result Screen ^ -->
+    <script src="script.js"></script>
+  </body>
+</html>

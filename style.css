@@ -1,0 +1,219 @@
+:root {
+  --gradient-bg-1: #2e4259;
+  --gradient-bg-2: #2f2e59;
+  --gradient-bg-3: #462e59;
+  --star-opponent-1: rgba(216, 255, 62, 0.4);
+  --star-opponent-2: #05ff00;
+  --star-you-1: rgba(251, 62, 255, 0.4);
+  --star-you-2: #00c2ff;
+  --color-white: #ffffff;
+  --loading-1: rgba(113, 69, 208, 0.7);
+  --loading-2: #7145d0;
+  --opponent-shadow: #1b2836;
+  --you-shadow: #291b34;
+  --center-shadow: #282745;
+}
+/* MAIN SETTING STYLE*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-bg-1),
+    var(--gradient-bg-2),
+    var(--gradient-bg-3)
+  );
+  height: 100vh;
+  width: 100vh;
+  color: var(--color-white);
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 120%;
+}
+button {
+  font-family: inherit;
+}
+.flex-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hidden {
+  display: none;
+}
+
+/* LOADING WINDOW */
+.loading {
+  color: var(--loading-1);
+  font-size: 300%;
+  animation: loading 3s forwards;
+  /* Add animation with increased opacity and scale (or font size) */
+}
+@keyframes loading {
+  100% {
+    font-size: 20%;
+    color: var(--loading-2);
+    opacity: 0;
+  }
+}
+/* GAME SCREEN */
+.game--screen {
+  opacity: 0;
+  animation: showGameScreen 2s forwards;
+}
+@keyframes showGameScreen {
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+/* PLAYER STYLING */
+.player {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.player--opponent {
+  margin-top: 7vh;
+}
+.player--you {
+  bottom: 0;
+  margin-bottom: 7vh;
+}
+/* Life styling */
+.life--container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 20vh;
+}
+.life-you--container {
+  margin-top: 2vh;
+}
+.life-opponent--container {
+  margin-bottom: 2vh;
+}
+/* Items styling */
+.items--container {
+  display: flex;
+  width: 37vh;
+  justify-content: space-between;
+}
+.item {
+  font-size: 400%;
+}
+.item--opponent {
+  text-shadow: 3px -5px 4px var(--opponent-shadow);
+  /* animation: opponentChooseItem 2s forwards linear; */
+  position: relative;
+}
+.item--you {
+  text-shadow: 3px 5px 4px var(--you-shadow);
+  /* animation: youChooseItem 2s forwards linear; */
+  position: relative;
+}
+.item--you-3 {
+  transform: rotate(0.5turn);
+  text-shadow: none;
+  text-shadow: -3px -5px 4px var(--you-shadow);
+}
+/* Animation for moving item */
+@keyframes opponentChooseItem {
+  0% {
+    top: 0;
+    text-shadow: 3px -5px 4px var(--opponent-shadow);
+  }
+  80% {
+    top: 16vh;
+  }
+  90% {
+    top: 14vh;
+  }
+  100% {
+    top: 14vh;
+    text-shadow: 1px -1px 4px var(--center-shadow);
+  }
+}
+@keyframes opponentReturnItem {
+  0% {
+    top: 14vh;
+    text-shadow: 1px -1px 4px var(--center-shadow);
+  }
+  100% {
+    top: 0;
+    text-shadow: 3px -5px 4px var(--opponent-shadow);
+  }
+}
+@keyframes youChooseItem {
+  0% {
+    bottom: 0;
+    text-shadow: 3px 5px 4px var(--you-shadow);
+  }
+  80% {
+    bottom: 16vh;
+  }
+  90% {
+    bottom: 14vh;
+  }
+  100% {
+    bottom: 15vh;
+    text-shadow: 1px 1px 4px var(--center-shadow);
+  }
+}
+@keyframes youReturnItem {
+  0% {
+    bottom: 15vh;
+    text-shadow: 1px 1px 4px var(--center-shadow);
+  }
+  100% {
+    bottom: 0;
+    text-shadow: 3px 5px 4px var(--you-shadow);
+  }
+}
+@keyframes showOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+@keyframes hideOpacity {
+  0% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* WIN STYLE */
+.game--round {
+  justify-content: space-between;
+  min-height: 10vh;
+  opacity: 0;
+}
+.format--text {
+  font-size: 170%;
+  width: max-content;
+  max-width: 40vh;
+  padding: 3px 1rem;
+  text-align: center;
+}
+.btn {
+  color: var(--color-white);
+  width: max-content;
+  font-size: 120%;
+  margin-top: 2vh;
+  background-color: rgba(244, 244, 244, 0.4);
+  border-radius: 2rem;
+  border: none;
+}
