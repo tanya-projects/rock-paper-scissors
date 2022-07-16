@@ -12,19 +12,20 @@ const youItems = document.querySelectorAll('.item--you');
 const gameRound = document.querySelector('.game--round');
 const roundResult = document.querySelector('.winner--round');
 const nextRound = document.querySelector('.btn--next');
-const opponentLifes = document.querySelectorAll('.life--opponent');
-const yourLifes = document.querySelectorAll('.life--you');
+const opponentLosesLifes = document.querySelectorAll('.life--opponent');
+const youLoseLifes = document.querySelectorAll('.life--you');
 const totalResult = document.querySelector('.total--result');
 const totalResultText = document.querySelector('.total--result-text');
 const gameScreen = document.querySelector('.game--screen');
 const newGame = document.querySelector('.new--game');
+const overlay = document.querySelector('.overlay');
 
 // STORE VARIABLES
 const timeChooseItemAnimation = '0.5s';
 
 // Life lose variables
-let yourLife = 0;
-let opponentLife = 0;
+let youLoseLife = 0;
+let opponentLosesLife = 0;
 
 // Hide loading screen
 setTimeout(`loading.classList.add('hidden')`, 2500);
@@ -77,21 +78,9 @@ const toNextRound = function () {
 
   // Hide game round screen
   setTimeout(`gameRound.classList.add('hidden')`, 400);
+  setTimeout(`overlay.classList.add('hidden')`, 400);
   addAnimation(gameRound, 'hideOpacity', '0.5s', 'forwards', 'linear');
-};
-
-const startNewGame = function () {
-  addAnimation(totalResult, 'hideOpacity', '1.4s', 'forwards', 'linear');
-  setTimeout(`totalResult.classList.add('hidden')`, 1500);
-  setTimeout(`gameScreen.classList.remove('hidden')`, 1300);
-  addAnimation(gameScreen, 'showOpacity', '1.5s', 'forwards', 'linear');
-  toNextRound();
-  opponentLifes.forEach((l) => {
-    l.attributes.src.value = 'img/life-opponent.png';
-  });
-  yourLifes.forEach((l) => {
-    l.attributes.src.value = 'img/life-you.png';
-  });
+  addAnimation(overlay, 'hideOpacity', '0.5s', 'forwards', 'linear');
 };
 
 // CLICK ON ITEM
@@ -109,6 +98,8 @@ youItems.forEach((yItem) =>
     // Show round result and next btn (if not third chsnge text on button)
     gameRound.classList.remove('hidden');
     addAnimation(gameRound, 'showOpacity', '1s', 'forwards', 'linear');
+    overlay.classList.remove('hidden');
+    addAnimation(overlay, 'showOpacity', '1s', 'forwards', 'linear');
 
     // Possible results
     if (
@@ -116,44 +107,53 @@ youItems.forEach((yItem) =>
       yItem.attributes.data_winrule.nodeValue
     ) {
       roundResult.textContent = 'NO ONE WINS';
+      setTimeout('toNextRound()', 1000);
     } else if (
       yItem.attributes.data_winrule.nodeValue ===
       oppItem.attributes.data_loserule.nodeValue
     ) {
       roundResult.textContent = 'YOU WIN';
-      opponentLifes[opponentLife].attributes.src.value = 'img/life-lost.png';
-      opponentLife++;
+      opponentLosesLifes[opponentLosesLife].attributes.src.value =
+        'img/life-lost.png';
+      opponentLosesLife++;
     } else if (
       oppItem.attributes.data_winrule.nodeValue ===
       yItem.attributes.data_loserule.nodeValue
     ) {
       roundResult.textContent = 'YOU LOSE';
-      yourLifes[yourLife].attributes.src.value = 'img/life-lost.png';
-      yourLife++;
+      youLoseLifes[youLoseLife].attributes.src.value = 'img/life-lost.png';
+      youLoseLife++;
     }
     // Stop click on items right after click in item
     youItems.forEach((it) => (it.style.pointerEvents = 'none'));
 
     // Go total result
-    if (yourLife === 3 || opponentLife === 3) {
+    if (youLoseLife === 3 || opponentLosesLife === 3) {
       totalResultWindow();
-      yourLife = 0;
-      opponentLife = 0;
+      youLoseLife = 0;
+      opponentLosesLife = 0;
     }
+    console.log(`You: ${youLoseLife}`, `Opponent: ${opponentLosesLife}`);
   })
 );
 
 // Click on next round
-nextRound.addEventListener('click', toNextRound);
+overlay.addEventListener('click', toNextRound);
+
+// if (!gameRound.classList.contains('hidden'))
 
 const totalResultWindow = function () {
   addAnimation(gameScreen, 'hideOpacity', '2.1s', 'forwards', 'linear');
+  addAnimation(overlay, 'hideOpacity', '2.1s', 'forwards', 'linear');
+  setTimeout(`overlay.classList.add('hidden')`, 2000);
   setTimeout(`gameScreen.classList.add('hidden')`, 2000);
   setTimeout(`totalResult.classList.remove('hidden')`, 2000);
-  yourLife === 3
+  youLoseLife === 3
     ? (totalResultText.textContent = 'YOU LOSE ALL LIFES')
     : (totalResultText.textContent = 'YOU BEAT YOUR OPPONENT');
 };
 
 // SET NEW GAME
-newGame.addEventListener('click', startNewGame);
+newGame.addEventListener('click', function () {
+  window.location.reload();
+});
